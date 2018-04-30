@@ -21,8 +21,8 @@ plotPuzzle <- function(Puzzle, resolution = 72) {
     for (j in 1:9) {
       if (Puzzle[i,j] != 0) {
         g <- g + annotate("text",
-                          x = 0.5 + (i - 1),
-                          y = 8.5 - (j - 1),
+                          y = 8.5 - (i - 1),
+                          x = 0.5 + (j - 1),
                           label = format(Puzzle[i,j]))
       }
     }
