@@ -1,9 +1,7 @@
 # higherSolver
 #
-# Sudoku solver using order search algorithms:
-# 1. neighbors (row, column, block)
-# 2. next...
-# 3. next...
+# Sudoku solver using order search algorithms: sole neighbor and
+# unique row, column and block.
 
 # Block indices: take (row,column) produce vector index
 bIndex <- array(0, dim = c(3,3,9))
