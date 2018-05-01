@@ -25,7 +25,7 @@ rowCol <- function(iGrid) {
   return(c(iGrid %% 9 + 1, iGrid %/% 9 + 1))
 }
 
-neighbors <- function(nR, nC, Puzzle) {
+nearNeighbors <- function(nR, nC, Puzzle) {
   bR <- (nR - 1) %/% 3 + 1
   bC <- (nC - 1) %/% 3 + 1
   neighbors <- c(Puzzle[nR,], Puzzle[,nC], Puzzle[bIndex[bR,bC,]])
@@ -39,7 +39,7 @@ whatsAvailable <- function(Puzzle, Avail, openCells) {
     rc <- openCells[i,]
     iR <- rc[1]
     iC <- rc[2]
-    Avail[iR,iC,] <- !(N %in% neighbors(iR, iC, Puzzle))
+    Avail[iR,iC,] <- !(N %in% nearNeighbors(iR, iC, Puzzle))
   }
   return(Avail)
 }
@@ -51,7 +51,7 @@ soleNeighbor <- function(Puzzle, Avail, openCells) {
     rc <- openCells[i,]
     iR <- rc[1]
     iC <- rc[2]
-    Avail[iR,iC,] <- !(N %in% neighbors(iR, iC, Puzzle))
+    Avail[iR,iC,] <- !(N %in% nearNeighbors(iR, iC, Puzzle))
     onlyOne <- sum(Avail[iR,iC,])
     if (onlyOne == 1) {
       Puzzle[iR,iC] <- which(Avail[iR,iC,])
