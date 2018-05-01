@@ -99,12 +99,11 @@ uniqueBox <- function(Puzzle, Avail) {
       for (bC in 1:3) {
         nSum <- sum(B[bIndex[bR,bC,]])
         if (nSum == 1) {
-          print(B[bIndex[bR,bC,]])
           nB <- which(B[bIndex[bR,bC,]] == TRUE)
-          nC <- (nB - 1) %/% 9 + 1
-          nR <- nB - (nC - 1) * 9
+          nC <- (nB - 1) %/% 3 + 1
+          nR <- nB - (nC - 1) * 3 + (bR - 1) * 3
+          nC <- nC + (bC - 1) * 3
           Puzzle[nR,nC] <- n
-          print(Puzzle)
           nFilled <- nFilled + 1
         }
       }
