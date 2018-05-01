@@ -99,10 +99,12 @@ uniqueBox <- function(Puzzle, Avail) {
       for (bC in 1:3) {
         nSum <- sum(B[bIndex[bR,bC,]])
         if (nSum == 1) {
-          nB <- which(B[bIndex[bR,bC,]] == n)
+          print(B[bIndex[bR,bC,]])
+          nB <- which(B[bIndex[bR,bC,]] == TRUE)
           nC <- (nB - 1) %/% 9 + 1
           nR <- nB - (nC - 1) * 9
           Puzzle[nR,nC] <- n
+          print(Puzzle)
           nFilled <- nFilled + 1
         }
       }
@@ -120,7 +122,6 @@ higherSolver <- function(Puzzle) {
     SN <- soleNeighbor(Puzzle, Avail, openCells)
     Puzzle <- SN$p
     nFilled <- SN$n
-    nFilledAll <- nFilledAll + nFilled
 
     # Unique in row elimination
     if (nFilled > 0) {
@@ -131,7 +132,6 @@ higherSolver <- function(Puzzle) {
     UR <- uniqueRow(Puzzle, Avail)
     Puzzle <- UR$p
     nFilled <- UR$n
-    nFilledAll <- nFilledAll + nFilled
 
     # Unique in column elimination
     if (nFilled > 0) {
@@ -142,7 +142,6 @@ higherSolver <- function(Puzzle) {
     UC <- uniqueCol(Puzzle, Avail)
     Puzzle <- UC$p
     nFilled <- UC$n
-    nFilledAll <- nFilledAll + nFilled
 
     # Unique in block elimination
     if (nFilled > 0) {
@@ -153,9 +152,8 @@ higherSolver <- function(Puzzle) {
     UB <- uniqueBox(Puzzle, Avail)
     Puzzle <- UB$p
     nFilled <- UB$n
-    nFilledAll <- nFilledAll + nFilled
 
-    if (nFilledAll == 0) {
+    if (SN$n + UR$n + UC$n + UB$n == 0) {
       print("Failed")
       return(Puzzle)
     }
